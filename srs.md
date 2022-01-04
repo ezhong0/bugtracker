@@ -14,7 +14,7 @@ This section will describe both functional and non-functional requirements
 ##### End User Requirements
 | Description | Notes |
 | --- | --- |
-| Create user/admin account | Account linked through email. (MFA? Demo account? ) |
+| Create user/admin account | Account linked through email. (MFA? Demo account?) |
 | Login account | "Forgot password" functionality |
 | Create project | Restrict to admin |
 | Assign users to project| Restrict to admin |
@@ -39,3 +39,15 @@ This section will describe both functional and non-functional requirements
 | User Profile | Edit information, user image, password change, info box |
 
 #### 5b. Non Functional Requirements
+##### Performance Requirements
+Performance similar to that of other web apps should be expected. Avoiding long waiting times for loading of web pages is important. User actions are expected to be instantaneous.
+##### Security Requirements
+Password storage must be held up to modern password security standards. User Data must be private, and project data must only be able to be viewed by authorized members of the network
+
+### 6. Architecture
+#### 6a. Frontend
+Javascript, Bootstrap
+#### 6b. Backend
+.NET Core C#, MS SQL Server
+
+*Jan 4 2022*
