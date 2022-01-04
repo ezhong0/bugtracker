@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using BugTracker.Models;
+using MySql.Data;
 
 namespace BugTracker
 {
@@ -24,6 +27,19 @@ namespace BugTracker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<Database>(options =>
+            options.UseMySQL(Configuration.GetConnectionString("BugTrackerDatabase")));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder =>
+                        builder
+                        .WithOrigins("https://localhost:5001", "https://localhost:5002")
+                        .AllowAnyHeader()
+                        .WithMethods("PUT", "DELETE", "GET")
+                    );
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
