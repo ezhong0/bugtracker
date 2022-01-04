@@ -7,6 +7,7 @@
 | | email |
 | | name |
 | | image |
+| | role |
 | Project | pid |
 | | title |
 | | description |
@@ -14,6 +15,7 @@
 | | dateModified |
 | Ticket | tid |
 | | title |
+| | description |
 | | Project |
 | | User (created) |
 | | User (assigned) |
@@ -27,9 +29,14 @@
 | | attribute |
 | | oldValue |
 | | newValue |
+| | User (created) |
 | | dateModified |
 | Comment | cid |
 | | Ticket |
 | | User (created) |
 | | text |
 | | dateCreated |
+| Media | mid |
+| | title |
+| | data |
+| | Ticket |
