@@ -130,23 +130,18 @@ namespace BugTracker.Models
                 entity.ToTable("history");
 
                 entity.Property(e => e.HistoryId).HasColumnName("historyid");
-                entity.Property(e => e.Attribute).HasColumnName("attribute");
-                entity.Property(e => e.OldValue).HasColumnName("oldvalue");
-                entity.Property(e => e.NewValue).HasColumnName("newvalue");
-                entity.Property(e => e.OldTitle)
-                    .HasColumnName("oldtitle")
-                    .HasMaxLength(80)
-                    .IsUnicode(false);
-                entity.Property(e => e.NewTitle)
-                    .HasColumnName("newtitle")
-                    .HasMaxLength(80)
-                    .IsUnicode(false);
-                entity.Property(e => e.OldDescription)
-                    .HasColumnName("oldescription")
-                    .HasColumnType("text");
-                entity.Property(e => e.NewDescription)
-                    .HasColumnName("newdescription")
-                    .HasColumnType("text");
+                entity.Property(e => e.Attribute)
+                   .HasColumnName("attribute")
+                   .HasMaxLength(80)
+                   .IsUnicode(false);
+                entity.Property(e => e.OldValue)
+                   .HasColumnName("oldvalue")
+                   .HasMaxLength(80)
+                   .IsUnicode(false);
+                entity.Property(e => e.NewValue)
+                   .HasColumnName("newvalue")
+                   .HasMaxLength(80)
+                   .IsUnicode(false);
                 entity.Property(e => e.UserId).HasColumnName("userid");
 
                 entity.HasOne(d => d.Ticket)
@@ -275,13 +270,9 @@ namespace BugTracker.Models
     public partial class History
     {
         public int HistoryId { get; set; }
-        public int Attribute { get; set; }
-        public int OldValue { get; set; } //incl. uid
-        public int NewValue { get; set; }
-        public string OldTitle { get; set; }
-        public string NewTitle { get; set; }
-        public string OldDescription { get; set; }
-        public string NewDescription { get; set; }
+        public string Attribute { get; set; }
+        public string OldValue { get; set; } //incl. uid
+        public string NewValue { get; set; }
         public DateTime DateModified { get; set; }
 
         public int UserId { get; set; }

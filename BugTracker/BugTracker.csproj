@@ -15,6 +15,8 @@
     <None Remove="Infrastructure\" />
     <None Remove="jQuery" />
     <None Remove="popper.js" />
+    <None Remove="Views\Controllers\" />
+    <None Remove="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,8 +33,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
+    <Folder Include="Views\Controllers\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Shared\_Footer.txt" />
+    <Content Remove="Views\_ViewImports.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BugTracker.csproj" />
   </ItemGroup>
 </Project>
