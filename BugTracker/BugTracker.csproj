@@ -11,6 +11,10 @@
     <None Remove="MySql.Data.EntityFrameworkCore" />
     <None Remove="MySql.Data" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="bootstrap" />
+    <None Remove="Infrastructure\" />
+    <None Remove="jQuery" />
+    <None Remove="popper.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,5 +25,14 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
+    <PackageReference Include="bootstrap" Version="5.1.3" />
+    <PackageReference Include="popper.js" Version="1.16.1" />
+    <PackageReference Include="jQuery" Version="3.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Shared\_Footer.txt" />
   </ItemGroup>
 </Project>
