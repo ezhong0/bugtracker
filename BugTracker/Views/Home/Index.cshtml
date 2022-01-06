@@ -2,35 +2,40 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center img js-fullheight" style="background-image: url(bg.jpg);">
+<div class="text-center img js-fullheight" style="background-image: url(bg.png);">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6 text-center mb-5">
+            <div class="col-md-6 text-center mb-5 mt-5">
                 <h2 class="heading-section">BugTracker</h2>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
-                    <h3 class="mb-4 text-center">Have an account?</h3>
+                    <h3 class="mb-4 text-center" style="font-size: 120%" >Sign in</h3>
                     <form action="#" class="signin-form">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username" required>
+                            <input type="text" class="form-control" placeholder="Username" style="font-size: 100%" required>
                         </div>
                         <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" placeholder="Password" required>
+                            <input id="password-field" type="password" class="form-control" placeholder="Password" style="font-size: 100%" required>
                             <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
-                        </div>
                         <div class="form-group d-md-flex">
-                            <div class="w-50">
-                                <label class="checkbox-wrap checkbox-primary">
+                            <div class="w-40">
+                                <label class="checkbox-wrap checkbox-primary p-0 m-0" style="font-size: smaller">
                                     Remember Me
                                     <input type="checkbox" checked>
                                     <span class="checkmark"></span>
                                 </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+                        </div>
+                        <div class="form-group d-md-flex text-left">
+                            <div class="w-50">
+                                <a href="#" style="color: #fff">Create Account</a>
                             </div>
                             <div class="w-50 text-md-right">
                                 <a href="#" style="color: #fff">Forgot Password</a>
