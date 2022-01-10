@@ -17,6 +17,13 @@
     <None Remove="popper.js" />
     <None Remove="Views\Controllers\" />
     <None Remove="Controllers\" />
+    <None Remove="Security\" />
+    <None Remove="System.Net.Http" />
+    <None Remove="Microsoft.AspNetCore.Mvc.WebApiCompatShim" />
+    <None Remove="Microsoft.AspNet.WebApi.Core" />
+    <None Remove="Microsoft.Owin.Host.SystemWeb" />
+    <None Remove="Owin" />
+    <None Remove="Microsoft.AspNet.WebApi.Owin" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,11 +37,15 @@
     <PackageReference Include="bootstrap" Version="5.1.3" />
     <PackageReference Include="popper.js" Version="1.16.1" />
     <PackageReference Include="jQuery" Version="3.6.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Owin" Version="5.2.7" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="Views\Controllers\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Shared\_Footer.txt" />

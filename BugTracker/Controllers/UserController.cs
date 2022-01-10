@@ -13,11 +13,11 @@ namespace BugTracker.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("CorsPolicy")]
-    public class EmployeesController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly Database _context;
 
-        public EmployeesController(Database context)
+        public UserController(Database context)
         {
             _context = context;
         }
@@ -41,7 +41,7 @@ namespace BugTracker.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetEmployee(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
 
@@ -57,7 +57,7 @@ namespace BugTracker.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(int id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.UserId)
             {
@@ -85,21 +85,21 @@ namespace BugTracker.Controllers
             return NoContent();
         }
 
-        // POST: api/Employees
+        // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostEmployee(User employee)
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Users.Add(employee);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.UserId }, employee);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/Employees/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteEmployee(int id)
+        public async Task<ActionResult<User>> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)

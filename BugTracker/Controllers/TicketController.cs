@@ -44,8 +44,8 @@ namespace BugTracker.Controllers
                 Project = _context.Projects.Find(t.ProjectId)
             });
 
-
             return result.ToList();
+
         }
 
         // GET: api/Tickets/5
