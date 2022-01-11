@@ -46,10 +46,12 @@
     <Folder Include="Views\Controllers\" />
     <Folder Include="Controllers\" />
     <Folder Include="Security\" />
+    <Folder Include="wwwroot\php\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Shared\_Footer.txt" />
     <Content Remove="Views\_ViewImports.cshtml" />
+    <Content Remove="wwwroot\php\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BugTracker.csproj" />
