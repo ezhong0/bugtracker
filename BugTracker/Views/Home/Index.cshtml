@@ -1,4 +1,6 @@
-﻿@{
+﻿@page
+@model BugTracker.Views.Models.LoginModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -13,7 +15,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
                     <h3 class="mb-4 text-center" style="font-size: 120%">Sign in</h3>
-                    <form action="#" class="signin-form">
+                    <form action="#" class="signin-form" id="loginform" runat="server">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Username" style="font-size: 100%" required>
                         </div>

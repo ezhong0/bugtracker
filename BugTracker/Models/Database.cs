@@ -22,7 +22,7 @@ namespace BugTracker.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=BugTracker.DB;user=root;password=Bl@ckpink");
+            optionsBuilder.UseMySQL("server=localhost;database=bugtrackerdb;user=root;password=Bl@ckpink");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -24,6 +24,10 @@
     <None Remove="Microsoft.Owin.Host.SystemWeb" />
     <None Remove="Owin" />
     <None Remove="Microsoft.AspNet.WebApi.Owin" />
+    <None Remove="Views\php\" />
+    <None Remove="Views\php\login.php" />
+    <None Remove="System.DirectoryServices.Protocols" />
+    <None Remove="System.Data.SqlClient" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,20 +44,27 @@
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Owin" Version="5.2.7" />
+    <PackageReference Include="System.DirectoryServices.Protocols" Version="6.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="Views\Controllers\" />
     <Folder Include="Controllers\" />
     <Folder Include="Security\" />
-    <Folder Include="wwwroot\php\" />
+    <Folder Include="Views\php\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Shared\_Footer.txt" />
     <Content Remove="Views\_ViewImports.cshtml" />
-    <Content Remove="wwwroot\php\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BugTracker.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\php\login.php">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>
