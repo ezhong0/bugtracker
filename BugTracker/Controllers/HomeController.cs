@@ -25,7 +25,7 @@ namespace BugTracker.Controllers
             }
             else
             {
-                return Index();
+                return View("Index");
             }
         }
 
