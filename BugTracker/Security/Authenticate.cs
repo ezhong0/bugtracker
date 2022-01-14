@@ -5,13 +5,14 @@ using System.Data.SqlClient;
 using System.DirectoryServices.Protocols;
 using System.Web;
 using Microsoft.Owin;
+using MySql.Data.MySqlClient;
 
 namespace BugTracker.Security
 {
     public class Authenticate
     {
 
-        public static LoginResult AttemptLogin(IOwinContext owinContext, string username, string password)
+        public static LoginResult AttemptLogin(string username, string password)
         {
             LoginResult result = new LoginResult();
 
@@ -20,14 +21,14 @@ namespace BugTracker.Security
             //conn.Open();
 
 
-            string sql = "SELECT NAME FROM USERS WHERE USERNAME = " + username;
+            string sql = "SELECT NAME FROM USER WHERE USERNAME='" + username + "'";
 
             DataSet ds = new DataSet();
-            using (SqlConnection conn = new SqlConnection(connection_string))
+            using (MySqlConnection conn = new MySqlConnection(connection_string))
             {
-                using (SqlDataAdapter da = new SqlDataAdapter())
+                using (MySqlDataAdapter da = new MySqlDataAdapter())
                 {
-                    da.SelectCommand = new SqlCommand(sql, conn);
+                    da.SelectCommand = new MySqlCommand(sql, conn);
                     da.Fill(ds);
                 }
             }

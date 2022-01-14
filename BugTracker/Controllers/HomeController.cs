@@ -6,21 +6,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BugTracker.Models;
+using BugTracker.Security;
+using BugTracker.Views.Models;
 
 namespace BugTracker.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        [HttpGet("[action]")]
+        [Route("/Success")]
+        public IActionResult Success(LoginModel loginModel)
         {
-            _logger = logger;
+            LoginResult loginResult = Authenticate.AttemptLogin(loginModel.User, loginModel.Password);
+
+            if (loginResult.Success)
+            {
+                return View();
+            }
+            else
+            {
+                return Index();
+            }
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
         }
 
         public IActionResult Privacy()

@@ -57,6 +57,7 @@
   <ItemGroup>
     <Content Remove="Views\Shared\_Footer.txt" />
     <Content Remove="Views\_ViewImports.cshtml" />
+    <Content Remove="Views\Home\Sucess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BugTracker.csproj" />
@@ -65,6 +66,16 @@
     <Content Include="Views\php\login.php">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Home\Sucess.Designer.cs">
+      <DependentUpon>Sucess.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Home\Sucess.cshtml">
+      <Generator>ResXFileCodeGenerator</Generator>
     </Content>
   </ItemGroup>
 </Project>

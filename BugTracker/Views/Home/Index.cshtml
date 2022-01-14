@@ -1,9 +1,7 @@
-﻿@page
-@model BugTracker.Views.Models.LoginModel
+﻿@model BugTracker.Views.Models.LoginModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
-
 <div class="text-center img js-fullheight" style="background-image: url(bg.png);">
     <div class="container">
         <div class="row justify-content-center">
@@ -15,19 +13,19 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
                     <h3 class="mb-4 text-center" style="font-size: 120%">Sign in</h3>
-                    <form action="#" class="signin-form" id="loginform" runat="server">
+                    <form asp-controller="Home" asp-action="Success" class="signin-form" id="loginform" runat="server" role="post" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username" style="font-size: 100%" required>
+                            <input asp-for="User" runat="server" type="text" class="form-control" placeholder="Username" style="font-size: 100%" required>
                         </div>
                         <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" placeholder="Password" style="font-size: 100%" required>
+                            <input asp-for="Password" runat="server" id="password-field" type="password" class="form-control" placeholder="Password" style="font-size: 100%" required>
                             <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
                         <div class="form-group d-md-flex">
                             <div class="w-40">
                                 <label class="checkbox-wrap checkbox-primary p-0 m-0" style="font-size: smaller">
                                     Remember Me
-                                    <input type="checkbox" checked>
+                                    <input runat="server" type="checkbox" checked>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
