@@ -33,15 +33,6 @@ namespace BugTracker.Security
                     da.Fill(ds);
                 }
             }
-            foreach (DataRow dataRow in ds.Rows)
-            {
-                foreach (var item in dataRow.ItemArray)
-                {
-                    Debug.WriteLine(item);
-                }
-            }
-
-
 
             if (ds.Rows.Count != 1)
             {
