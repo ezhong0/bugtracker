@@ -23,7 +23,7 @@ namespace BugTracker.Controllers
             if (loginResult.Success)
             {
                 HttpContext.Session.SetString("username", loginModel.User);
-                ViewData["Test String"] = HttpContext.Session.GetString("username");
+                ViewData["username"] = HttpContext.Session.GetString("username");
                 return View("Dashboard");
             }
             else
@@ -34,7 +34,30 @@ namespace BugTracker.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
+        }
+
+        [HttpGet("[action]")]
+        [Route("/Dash")]
+        public IActionResult Dashboard()
+        {
+            ViewData["username"] = HttpContext.Session.GetString("username");
+            return View("Dashboard");
+        }
+
+        public IActionResult Project()
+        {
+            return View("Project");
+        }
+
+        public IActionResult Ticket()
+        {
+            return View("Ticket");
+        }
+
+        public IActionResult Profile()
+        {
+            return View("Profile");
         }
 
         private readonly ILogger<HomeController> _logger;
