@@ -86,6 +86,16 @@ namespace BugTracker
                         .WithMethods("PUT", "DELETE", "GET")
                     );
             });
+
+            services.AddSession();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+            });
+            services.AddMemoryCache();
+            services.AddMvc();
+            //services.AddControllers();
+            services.AddControllers(options => options.EnableEndpointRouting = false);
+            //MvcOptions.EnableEndpointRouting = false;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,11 +120,20 @@ namespace BugTracker
 
             app.UseCors();
 
-            app.UseEndpoints(endpoints =>
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //});
+
+            app.UseStaticFiles();
+            app.UseSession();
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
+                routes.MapRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

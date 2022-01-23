@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 using BugTracker.Models;
 using BugTracker.Security;
 using BugTracker.Views.Models;
@@ -14,14 +15,16 @@ namespace BugTracker.Controllers
     public class HomeController : Controller
     {
         [HttpGet("[action]")]
-        [Route("/Success")]
-        public IActionResult Success(LoginModel loginModel)
+        [Route("/Dashboard")]
+        public IActionResult Login(LoginModel loginModel)
         {
             LoginResult loginResult = Authenticate.AttemptLogin(loginModel.User, loginModel.Password);
 
             if (loginResult.Success)
             {
-                return View();
+                HttpContext.Session.SetString("username", loginModel.User);
+                ViewData["Test String"] = HttpContext.Session.GetString("username");
+                return View("Dashboard");
             }
             else
             {
