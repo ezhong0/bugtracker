@@ -47,6 +47,14 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet("[action]")]
+        [Route("/Createacc")]
+        public IActionResult ToCreateacc()
+        {
+            HttpContext.Session.Clear();
+            return View("Createacc");
+        }
+
+        [HttpGet("[action]")]
         [Route("/Logout")]
         public IActionResult Logout()
         {

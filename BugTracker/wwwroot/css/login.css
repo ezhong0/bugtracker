@@ -11428,7 +11428,7 @@ a {
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease;
-    color: #fbceb5;
+    color: #bf80ff;
 }
 
     a:hover, a:focus {
@@ -11447,7 +11447,7 @@ h1, h2, h3, h4, h5,
 }
 
 .bg-primary {
-    background: #fbceb5 !important;
+    background: #bf80ff !important;
 }
 
 .ftco-section {
@@ -11635,11 +11635,11 @@ textarea.form-control {
 
 /* Style the checkmark/indicator */
 .checkbox-primary {
-    color: #fbceb5;
+    color: #bf80ff;
 }
 
     .checkbox-primary input:checked ~ .checkmark:after {
-        color: #fbceb5;
+        color: #bf80ff;
     }
 
 .btn {
@@ -11656,30 +11656,31 @@ textarea.form-control {
     }
 
     .btn.btn-primary {
-        background: #fbceb5 !important;
-        border: 1px solid #fbceb5 !important;
+        background: #bf80ff !important;
+        border: 1px solid #bf80ff !important;
         color: #000 !important;
     }
 
         .btn.btn-primary:hover {
-            border: 1px solid #fbceb5;
+            border: 1px solid #bf80ff;
             background: transparent;
-            color: #fbceb5;
+            color: #bf80ff;
         }
 
         .btn.btn-primary.btn-outline-primary {
-            border: 1px solid #fbceb5;
+            border: 1px solid #bf80ff;
             background: transparent;
-            color: #fbceb5;
+            color: #bf80ff;
         }
 
             .btn.btn-primary.btn-outline-primary:hover {
                 border: 1px solid transparent;
-                background: #fbceb5;
+                background: #bf80ff;
                 color: #fff;
             }
 
 footer {
+    height: 100px;
     background: #212529;
     color: #fff;
     padding: 25px 0;
@@ -11707,7 +11708,7 @@ footer {
 
             footer .social li a:hover {
                 /*                color: #11ABB0;*/
-                color: #9966cc;
+                color: #bf80ff;
             }
 
         footer .social li a {
@@ -11716,3 +11717,39 @@ footer {
             -o-transition: color .2s ease-in-out;
             transition: color .2s ease-in-out;
         }
+
+header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+}
+
+    header.masthead h1, header.masthead .h1 {
+        font-size: 2.25rem;
+    }
+
+@media (min-width: 992px) {
+    header.masthead {
+        height: 100vh;
+        min-height: 40rem;
+        padding-top: 4.5rem;
+        padding-bottom: 0;
+    }
+
+        header.masthead p {
+            font-size: 1.15rem;
+        }
+
+        header.masthead h1, header.masthead .h1 {
+            font-size: 3rem;
+        }
+}
+
+@media (min-width: 1200px) {
+    header.masthead h1, header.masthead .h1 {
+        font-size: 3.5rem;
+    }
+}
+
+.blurbox {
+    backdrop-filter: blur(10px);
+}

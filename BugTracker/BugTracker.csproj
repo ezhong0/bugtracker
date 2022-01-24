@@ -57,7 +57,6 @@
     <Content Remove="Views\Shared\_Footer.txt" />
     <Content Remove="Views\_ViewImports.cshtml" />
     <Content Remove="Views\Home\Sucess.cshtml" />
-    <Content Remove="wwwroot\css\layout.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BugTracker.csproj" />
