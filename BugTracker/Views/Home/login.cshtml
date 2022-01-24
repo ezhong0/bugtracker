@@ -1,0 +1,70 @@
+﻿@model BugTracker.Views.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<head>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<div class="text-center img js-fullheight" style="background-image: url(bg2.jpeg);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5 mt-5">
+                <h2 class="heading-section">BugTracker</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-wrap p-0">
+                    <h3 class="mb-4 text-center" style="font-size: 120%">Sign in</h3>
+                    <form asp-controller="Home" asp-action="Login" class="signin-form" id="loginform" runat="server" method="POST">
+                        <div class="form-group">
+                            <input asp-for="User" runat="server" type="text" class="form-control" placeholder="Username" style="font-size: 100%" required>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Password" runat="server" id="password-field" type="password" class="form-control" placeholder="Password" style="font-size: 100%" required>
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="form-group d-md-flex">
+                            <div class="w-40">
+                                <label class="checkbox-wrap checkbox-primary p-0 m-0" style="font-size: smaller">
+                                    Remember Me
+                                    <input runat="server" type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+                        </div>
+                        <div class="form-group d-md-flex text-left">
+                            <div class="w-50">
+                                <a href="#" style="color: #fff">Create Account</a>
+                            </div>
+                            <div class="w-50 text-md-right">
+                                <a href="#" style="color: #fff">Forgot Password</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <span class="copyright">&copy; 2022 Edward Zhong</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="social">
+                    <li><a href="https://github.com/ezhong0/"><i class="fab fa-github"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/edwardzhong0/"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="mailto:edwardrzhong@gmail.com"><i class="fas fa-envelope"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

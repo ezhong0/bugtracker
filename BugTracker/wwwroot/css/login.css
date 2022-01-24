@@ -11706,7 +11706,8 @@ footer {
         }
 
             footer .social li a:hover {
-                color: #11ABB0;
+                /*                color: #11ABB0;*/
+                color: #9966cc;
             }
 
         footer .social li a {

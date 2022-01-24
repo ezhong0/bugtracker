@@ -28,12 +28,29 @@ namespace BugTracker.Controllers
             }
             else
             {
-                return View("Index");
+                return View("Login");
             }
         }
-
+        
         public IActionResult Index()
         {
+            PreserveViewData();
+            return View("Index");
+        }
+
+        [HttpGet("[action]")]
+        [Route("/Login")]
+        public IActionResult ToLogin()
+        {
+            HttpContext.Session.Clear();
+            return View("Login");
+        }
+
+        [HttpGet("[action]")]
+        [Route("/Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
             return View("Index");
         }
 
@@ -41,23 +58,63 @@ namespace BugTracker.Controllers
         [Route("/Dash")]
         public IActionResult Dashboard()
         {
-            ViewData["username"] = HttpContext.Session.GetString("username");
+            if (!HasSession())
+            {
+                return Logout();
+            }
+            PreserveViewData();
             return View("Dashboard");
         }
 
+
+        [HttpGet("[action]")]
+        [Route("/Project")]
         public IActionResult Project()
         {
+            if (!HasSession())
+            {
+                return Logout();
+            }
+            PreserveViewData();
             return View("Project");
         }
 
+        [HttpGet("[action]")]
+        [Route("/Ticket")]
         public IActionResult Ticket()
         {
+            if (!HasSession())
+            {
+                return Logout();
+            }
+            PreserveViewData();
             return View("Ticket");
         }
 
+        [HttpGet("[action]")]
+        [Route("/Profile")]
         public IActionResult Profile()
         {
+            if (!HasSession())
+            {
+                return Logout();
+            }
+            PreserveViewData();
             return View("Profile");
+        }
+
+        private void PreserveViewData()
+        {
+            ViewData["username"] = HttpContext.Session.GetString("username");
+        }
+
+        private Boolean HasSession()
+        {
+            if (HttpContext.Session.GetString("username") is null)
+            {
+                return false;
+            }
+            return true;
         }
 
         private readonly ILogger<HomeController> _logger;
