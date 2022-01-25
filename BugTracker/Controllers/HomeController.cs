@@ -15,8 +15,8 @@ namespace BugTracker.Controllers
     public class HomeController : Controller
     {
         [HttpGet("[action]")]
-        [Route("/LoginSuccess")]
-        public IActionResult Login(LoginModel loginModel)
+        [Route("/AttemptLogin")]
+        public IActionResult AttemptLogin(LoginModel loginModel)
         {
             LoginResult loginResult = Authenticate.AttemptLogin(loginModel.Email, loginModel.Password);
 
@@ -36,7 +36,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet("[action]")]
-        [Route("/AccountCreated")]
+        [Route("/AccountCreate")]
         public IActionResult CreateAccount(CreateaccModel createaccModel)
         {
             CreateAccountResult createAccountResult = Authenticate.CreateAccount(createaccModel.Email, createaccModel.FirstName, createaccModel.LastName, createaccModel.Password);
@@ -150,7 +150,7 @@ namespace BugTracker.Controllers
 
         private Boolean HasSession()
         {
-            if (HttpContext.Session.GetString("username") is null)
+            if (HttpContext.Session.GetString("email") is null)
             {
                 return false;
             }

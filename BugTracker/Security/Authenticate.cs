@@ -24,11 +24,16 @@ namespace BugTracker.Security
 
             string sql = "SELECT * FROM USER WHERE EMAIL='" + email + "'";
 
+            Debug.WriteLine(email + " " + password);
+
             DataTable ds = new();
             using (MySqlConnection conn = new(connection_string))
             {
+                Debug.WriteLine(conn.State.ToString());
+                conn.Open();
                 using (MySqlDataAdapter da = new())
                 {
+                    Debug.WriteLine(conn.State.ToString() + " 2");
                     da.SelectCommand = new MySqlCommand(sql, conn);
                     da.Fill(ds);
                 }
@@ -38,9 +43,11 @@ namespace BugTracker.Security
             {
                 result.Success = false;
                 result.ErrorMessage = "cant find email";
+                Debug.WriteLine("found.");
             }
             else
             {
+                Debug.WriteLine("aint.");
 
                 if ((string)((ds.Rows[0])["password"]) == password)
                 {
