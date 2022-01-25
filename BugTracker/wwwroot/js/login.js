@@ -4,9 +4,9 @@
 
 	var fullHeight = function () {
 
-		$('.js-fullheight').css('height', $(window).height()-100);
+		$('.js-fullheight').css('height', $(window).height()-95);
 		$(window).resize(function () {
-			$('.js-fullheight').css('height', $(window).height()-100);
+			$('.js-fullheight').css('height', $(window).height()-95);
 		});
 
 	};

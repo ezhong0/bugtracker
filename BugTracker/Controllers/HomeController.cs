@@ -15,15 +15,18 @@ namespace BugTracker.Controllers
     public class HomeController : Controller
     {
         [HttpGet("[action]")]
-        [Route("/Dashboard")]
+        [Route("/LoginSuccess")]
         public IActionResult Login(LoginModel loginModel)
         {
-            LoginResult loginResult = Authenticate.AttemptLogin(loginModel.User, loginModel.Password);
+            LoginResult loginResult = Authenticate.AttemptLogin(loginModel.Email, loginModel.Password);
 
             if (loginResult.Success)
             {
-                HttpContext.Session.SetString("username", loginModel.User);
-                ViewData["username"] = HttpContext.Session.GetString("username");
+                HttpContext.Session.SetString("firstname", loginResult.FirstName);
+                HttpContext.Session.SetString("lastname", loginResult.LastName);
+                HttpContext.Session.SetString("email", loginResult.Email);
+
+                ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
                 return View("Dashboard");
             }
             else
@@ -31,7 +34,28 @@ namespace BugTracker.Controllers
                 return View("Login");
             }
         }
-        
+
+        [HttpGet("[action]")]
+        [Route("/AccountCreated")]
+        public IActionResult CreateAccount(CreateaccModel createaccModel)
+        {
+            CreateAccountResult createAccountResult = Authenticate.CreateAccount(createaccModel.Email, createaccModel.FirstName, createaccModel.LastName, createaccModel.Password);
+
+            if (createAccountResult.Success)
+            {
+                HttpContext.Session.SetString("firstname", createAccountResult.FirstName);
+                HttpContext.Session.SetString("lastname", createAccountResult.LastName);
+                HttpContext.Session.SetString("email", createAccountResult.Email);
+
+                ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
+                return View("Dashboard");
+            }
+            else
+            {
+                return View("Createacc");
+            }
+        }
+
         public IActionResult Index()
         {
             PreserveViewData();

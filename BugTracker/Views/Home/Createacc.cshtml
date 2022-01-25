@@ -6,7 +6,7 @@
 <head>
     <link rel="stylesheet" href="css/login.css">
 </head>
-<div class="text-center img js-fullheight" style="background-image: url(bg3.jpeg); filter: brightness(120%)">
+<div class="text-center img js-fullheight" style="background-image: url(bg3.jpeg); filter: brightness(100%)">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5 mt-5">
@@ -17,7 +17,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
                     <h3 class="mb-4 text-center" style="font-size: 120%">Create Account</h3>
-                    <form asp-controller="Home" asp-action="Login" class="signin-form" id="loginform" runat="server" method="POST">
+                    <form asp-controller="Home" asp-action="CreateAccount" class="signin-form" id="loginform" runat="server" method="POST">
                         <div class="form-group">
                             <input asp-for="Email" runat="server" type="text" class="form-control" placeholder="Email" style="font-size: 100%" required>
                         </div>
@@ -28,10 +28,7 @@
                             <input asp-for="LastName" runat="server" type="text" class="form-control" placeholder="Last Name" style="font-size: 100%" required>
                         </div>
                         <div class="form-group">
-                            <input asp-for="User" runat="server" type="text" class="form-control" placeholder="Username" style="font-size: 100%" required>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="Password" runat="server" id="password-field" type="password" class="Password" placeholder="Password" style="font-size: 100%" required>
+                            <input asp-for="Password" runat="server" id="password-field" type="password" class="form-control" placeholder="Password" style="font-size: 100%" required>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>

@@ -1,6 +1,6 @@
 ﻿namespace BugTracker.Security
 {
-    public class LoginResult
+    public class CreateAccountResult
     {
         public bool Success { get; set; }
 

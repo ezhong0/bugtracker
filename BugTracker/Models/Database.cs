@@ -10,6 +10,8 @@ namespace BugTracker.Models
 {
     public partial class Database : DbContext
     {
+        //Down() in initial migration drops tables? investigate later
+
         public Database() { }
         public Database(DbContextOptions<Database> options) : base(options) { }
 
@@ -27,8 +29,9 @@ namespace BugTracker.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-        modelBuilder.Entity<User>(entity =>
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("user");
 
