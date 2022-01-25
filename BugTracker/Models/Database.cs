@@ -35,14 +35,19 @@ namespace BugTracker.Models
                 entity.Property(e => e.UserId).HasColumnName("userid");
                 entity.Property(e => e.RoleId).HasColumnName("roleid");
 
-                entity.Property(e => e.UserName)
+                entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasColumnName("username")
+                    .HasColumnName("email")
                     .HasMaxLength(80)
                     .IsUnicode(false);
-                entity.Property(e => e.Name)
+                entity.Property(e => e.FirstName)
                     .IsRequired()
-                    .HasColumnName("name")
+                    .HasColumnName("firstname")
+                    .HasMaxLength(80)
+                    .IsUnicode(false);
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasColumnName("lastname")
                     .HasMaxLength(80)
                     .IsUnicode(false);
                 entity.Property(e => e.Password)
@@ -208,9 +213,10 @@ namespace BugTracker.Models
         }
         public int UserId { get; set; }
         public int RoleId { get; set; }
-        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Password { get; set; } // will need to change
-        public string Name { get; set; }
 
         public virtual ICollection<Ticket> AssignTicket { get; set; }
         public virtual ICollection<Ticket> CreateTicket { get; set; }

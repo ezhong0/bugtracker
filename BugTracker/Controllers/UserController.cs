@@ -32,8 +32,9 @@ namespace BugTracker.Controllers
             {
                 UserId = e.UserId,
                 RoleId = e.RoleId,
-                UserName = e.UserName,
-                Name = e.Name
+                FirstName = e.FirstName,
+                LastName = e.LastName,
+                Email = e.Email
             });
 
             return result.ToList();

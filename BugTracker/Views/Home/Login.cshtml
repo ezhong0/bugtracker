@@ -23,7 +23,7 @@
                         </div>
                         <div class="form-group">
                             <input asp-for="Password" runat="server" id="password-field" type="password" class="form-control" placeholder="Password" style="font-size: 100%" required>
-                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            @*<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>*@
                         </div>
                         @*<div class="form-group d-md-flex">
                                 <div class="w-40">
@@ -41,9 +41,9 @@
                             <div class="w-50">
                                 <a asp-action="ToCreateacc" style="color: #fff">Create Account</a>
                             </div>
-                            <div class="w-50 text-md-right">
+                            @*<div class="w-50 text-md-right">
                                 <a href="#" style="color: #fff">Forgot Password</a>
-                            </div>
+                            </div>*@
                         </div>
                     </form>
                 </div>
