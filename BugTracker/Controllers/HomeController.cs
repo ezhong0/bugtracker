@@ -39,6 +39,14 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet("[action]")]
+        [Route("/Home")]
+        public IActionResult Home()
+        {
+            PreserveViewData();
+            return View("Index");
+        }
+
+        [HttpGet("[action]")]
         [Route("/Login")]
         public IActionResult ToLogin()
         {
