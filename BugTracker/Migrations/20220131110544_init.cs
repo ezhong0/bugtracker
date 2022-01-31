@@ -33,7 +33,7 @@ namespace BugTracker.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     title = table.Column<string>(unicode: false, maxLength: 80, nullable: false),
                     description = table.Column<string>(type: "text", nullable: true),
-                    datemodified = table.Column<DateTime>(type: "date", nullable: false),
+                    datemodified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -190,7 +190,6 @@ namespace BugTracker.Migrations
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
-        }
+        { }
     }
 }

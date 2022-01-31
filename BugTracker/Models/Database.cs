@@ -124,7 +124,7 @@ namespace BugTracker.Models
 
                 entity.Property(e => e.DateModified)
                     .HasColumnName("datemodified")
-                    .HasColumnType("date");
+                    .HasColumnType("timestamp");
 
                 entity.HasOne(d => d.UserCreated)
                     .WithMany(p => p.Project)

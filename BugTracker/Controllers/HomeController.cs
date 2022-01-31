@@ -66,7 +66,7 @@ namespace BugTracker.Controllers
         public IActionResult CreateProject(DashboardModel dashboardModel)
         {
             string sql = "INSERT INTO PROJECT (title, description, datemodified, UserId) VALUES " +
-                "('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', " + HttpContext.Session.GetInt32("userid") + ")";
+                "('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', " + HttpContext.Session.GetInt32("userid") + ")";
 
             using MySqlConnection conn = new(CONN_STR);
             conn.Open();

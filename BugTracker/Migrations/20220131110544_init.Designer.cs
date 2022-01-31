@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugTracker.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20220125042332_init")]
+    [Migration("20220131110544_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,7 +127,7 @@ namespace BugTracker.Migrations
 
                     b.Property<DateTime>("DateModified")
                         .HasColumnName("datemodified")
-                        .HasColumnType("date");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("Description")
                         .HasColumnName("description")

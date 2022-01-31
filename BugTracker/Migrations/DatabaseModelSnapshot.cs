@@ -125,7 +125,7 @@ namespace BugTracker.Migrations
 
                     b.Property<DateTime>("DateModified")
                         .HasColumnName("datemodified")
-                        .HasColumnType("date");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("Description")
                         .HasColumnName("description")
