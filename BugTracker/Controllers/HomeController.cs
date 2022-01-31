@@ -33,11 +33,11 @@ namespace BugTracker.Controllers
 
 
                 ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
-                return View("Dashboard");
+                return RedirectToAction("Dashboard", "Home");
             }
             else
             {
-                return View("Login");
+                return RedirectToAction("ToLogin", "Home");
             }
         }
 
@@ -53,23 +53,26 @@ namespace BugTracker.Controllers
                 HttpContext.Session.SetString("email", createaccModel.Email);
 
                 ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
-                return View("Dashboard");
+                return RedirectToAction("Dashboard", "Home");
             }
             else
             {
-                return View("Createacc");
+                return RedirectToAction("ToCreateacc", "Home");
             }
         }
 
         [HttpGet("[action]")]
-        [Route("/ProjectCreate")]
-        public void CreateProject(DashboardModel dashboardModel)
+        [Route("/CreateProject")]
+        public IActionResult CreateProject(DashboardModel dashboardModel)
         {
-            string sql = "INSERT INTO PROJECT (title, description, datemodified, UserId) VALUES ('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now + "', " + HttpContext.Session.GetInt32("userid") + ")";
+            string sql = "INSERT INTO PROJECT (title, description, datemodified, UserId) VALUES ('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', " + HttpContext.Session.GetInt32("userid") + ")";
 
             using MySqlConnection conn = new(CONN_STR);
+            conn.Open();
             MySqlCommand com = new(sql, conn);
             com.ExecuteNonQuery();
+
+            return RedirectToAction("Dashboard", "Home");
         }
 
         public IActionResult Index()
@@ -161,7 +164,7 @@ namespace BugTracker.Controllers
 
         private void PreserveViewData()
         {
-            //ViewData["username"] = HttpContext.Session.GetString("username");
+            ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
         }
 
         private Boolean HasSession()
