@@ -67,30 +67,28 @@ namespace BugTracker.Security
             string sqlemail = "SELECT * FROM USER WHERE EMAIL='" + email + "'";
             string sql = "INSERT INTO USER (roleid, email, firstname, lastname, password) VALUES (-1, '" + email + "', '" + firstname + "', '" + lastname + "', '" + password + "')" ;
 
-            using (MySqlConnection conn = new(connection_string))
+            using MySqlConnection conn = new(connection_string);
+            DataTable ds = new();
+            using (MySqlDataAdapter da = new())
             {
-                DataTable ds = new();
-                using (MySqlDataAdapter da = new())
-                {
-                    da.SelectCommand = new MySqlCommand(sqlemail, conn);
-                    da.Fill(ds);
-                    
-                }
-                conn.Open();
-                if (ds.Rows.Count >= 1)
-                {
-                    return false;
-                    //result.ErrorMessage = "already has account";
-                }
-                else
-                {
-                    MySqlCommand com = new(sql, conn);
-                    com.ExecuteNonQuery();
-                    return true;
-                    //result.FirstName = firstname;
-                    //result.LastName = lastname;
-                    //result.Email = email;
-                }
+                da.SelectCommand = new MySqlCommand(sqlemail, conn);
+                da.Fill(ds);
+
+            }
+            conn.Open();
+            if (ds.Rows.Count >= 1)
+            {
+                return false;
+                //result.ErrorMessage = "already has account";
+            }
+            else
+            {
+                MySqlCommand com = new(sql, conn);
+                com.ExecuteNonQuery();
+                return true;
+                //result.FirstName = firstname;
+                //result.LastName = lastname;
+                //result.Email = email;
             }
         }
     }

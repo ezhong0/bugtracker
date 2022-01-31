@@ -10,7 +10,7 @@ using BugTracker.Models;
 using BugTracker.Security;
 using BugTracker.Views.Models;
 using MySql.Data.MySqlClient;
-
+using System.Data;
 
 namespace BugTracker.Controllers
 {
@@ -65,7 +65,8 @@ namespace BugTracker.Controllers
         [Route("/CreateProject")]
         public IActionResult CreateProject(DashboardModel dashboardModel)
         {
-            string sql = "INSERT INTO PROJECT (title, description, datemodified, UserId) VALUES ('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', " + HttpContext.Session.GetInt32("userid") + ")";
+            string sql = "INSERT INTO PROJECT (title, description, datemodified, UserId) VALUES " +
+                "('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', " + HttpContext.Session.GetInt32("userid") + ")";
 
             using MySqlConnection conn = new(CONN_STR);
             conn.Open();
@@ -110,13 +111,36 @@ namespace BugTracker.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return View("Index");
+            return RedirectToAction("Home", "Home");
         }
 
         [HttpGet("[action]")]
         [Route("/Dash")]
         public IActionResult Dashboard()
         {
+
+            string sql = "SELECT * FROM PROJECT WHERE USERID = '" + HttpContext.Session.GetInt32("userid") + "'";
+
+            DataTable ds = new();
+            using (MySqlConnection conn = new(CONN_STR))
+            {
+                conn.Open();
+                using MySqlDataAdapter da = new();
+                da.SelectCommand = new MySqlCommand(sql, conn);
+                da.Fill(ds);
+            }
+            
+            ViewBag.projects = (from DataRow dr in ds.Rows
+                                select new DashboardModel()
+                                {
+                                    ProjectId = Convert.ToInt32(dr["projectid"]),
+                                    Title = dr["title"].ToString(),
+                                    Description = dr["description"].ToString(),
+                                    DateModified = dr["datemodified"].ToString(),
+                                    UserId = Convert.ToInt32(dr["userid"])
+
+                                }).ToList();
+
             if (!HasSession())
             {
                 return Logout();
@@ -124,6 +148,15 @@ namespace BugTracker.Controllers
             PreserveViewData();
             return View("Dashboard");
         }
+
+        //class ProjectData
+        //{
+        //    public int ProjectId { get; set; }
+        //    public string Title { get; set; }
+        //    public string Description { get; set; }
+        //    public string DateModified { get; set; }
+        //    public int UserId { get; set; }
+        //}
 
 
         [HttpGet("[action]")]

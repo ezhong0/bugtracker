@@ -14,11 +14,11 @@
         <partial name="SideNavbar" />
         <div id="layoutSidenav_content">
             <main>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="createProjectModal" tabindex="-1" aria-labelledby="createProjectModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Create New Project</h5>
+                                <h5 class="modal-title" id="createProjectModalLabel">Create New Project</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form asp-controller="Home" asp-action="CreateProject" id="loginform" runat="server" method="POST">
@@ -43,6 +43,42 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="viewProjectModal" tabindex="-1" aria-labelledby="viewProjectModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewProjectModalLabel">My Projects</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>DateModified</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach (var item in ViewBag.projects)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Title
+                                            </td>
+                                            <td>
+                                                @item.Description
+                                            </td>
+                                            <td>
+                                                @item.DateModified
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Dashboard</h1>
                     <ol class="breadcrumb mb-4">
@@ -53,7 +89,7 @@
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">Create New Project</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+                                    <a class="small text-white stretched-link" data-bs-toggle="modal" data-bs-target="#createProjectModal"></a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -71,7 +107,7 @@
                             <div class="card bg-success text-white mb-4">
                                 <div class="card-body">My projects</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <a class="small text-white stretched-link" data-bs-toggle="modal" data-bs-target="#viewProjectModal"></a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -93,5 +129,5 @@
             </footer>
         </div>
     </div>
-
+    @*<script src="js/dashmodal.js"></script>*@
 </body>
