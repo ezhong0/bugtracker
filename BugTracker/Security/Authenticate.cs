@@ -24,37 +24,29 @@ namespace BugTracker.Security
 
             string sql = "SELECT * FROM USER WHERE EMAIL='" + email + "'";
 
-            Debug.WriteLine(email + " " + password);
-
             DataTable ds = new();
             using (MySqlConnection conn = new(connection_string))
             {
-                Debug.WriteLine(conn.State.ToString());
                 conn.Open();
-                using (MySqlDataAdapter da = new())
-                {
-                    Debug.WriteLine(conn.State.ToString() + " 2");
-                    da.SelectCommand = new MySqlCommand(sql, conn);
-                    da.Fill(ds);
-                }
+                using MySqlDataAdapter da = new();
+                da.SelectCommand = new MySqlCommand(sql, conn);
+                da.Fill(ds);
             }
 
             if (ds.Rows.Count != 1)
             {
                 result.Success = false;
                 result.ErrorMessage = "cant find email";
-                Debug.WriteLine("found.");
             }
             else
             {
-                Debug.WriteLine("aint.");
-
                 if ((string)((ds.Rows[0])["password"]) == password)
                 {
                     result.Success = true;
                     result.FirstName = (string)((ds.Rows[0])["firstname"]);
                     result.LastName = (string)((ds.Rows[0])["lastname"]);
                     result.Email = (string)((ds.Rows[0])["email"]);
+                    result.UserId = (int)((ds.Rows[0])["UserId"]);
                 }
                 else
                 {
@@ -66,9 +58,9 @@ namespace BugTracker.Security
             return result;
         }
 
-        public static CreateAccountResult CreateAccount(string email, string firstname, string lastname, string password)
+        public static Boolean CreateAccount(string email, string firstname, string lastname, string password)
         {
-            CreateAccountResult result = new();
+            //CreateAccountResult result = new();
 
             string connection_string = "server=localhost;database=bugtrackerdb;user=root;password=Bl@ckpink";
 
@@ -87,22 +79,19 @@ namespace BugTracker.Security
                 conn.Open();
                 if (ds.Rows.Count >= 1)
                 {
-                    result.Success = false;
-                    result.ErrorMessage = "already has account";
+                    return false;
+                    //result.ErrorMessage = "already has account";
                 }
                 else
                 {
                     MySqlCommand com = new(sql, conn);
                     com.ExecuteNonQuery();
-                    result.Success = true;
-                    result.FirstName = firstname;
-                    result.LastName = lastname;
-                    result.Email = email;
+                    return true;
+                    //result.FirstName = firstname;
+                    //result.LastName = lastname;
+                    //result.Email = email;
                 }
             }
-
-
-            return result;
         }
     }
 }

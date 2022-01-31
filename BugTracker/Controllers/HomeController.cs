@@ -9,11 +9,15 @@ using Microsoft.AspNetCore.Http;
 using BugTracker.Models;
 using BugTracker.Security;
 using BugTracker.Views.Models;
+using MySql.Data.MySqlClient;
+
 
 namespace BugTracker.Controllers
 {
     public class HomeController : Controller
     {
+        static readonly string CONN_STR = "server=localhost;database=bugtrackerdb;user=root;password=Bl@ckpink";
+
         [HttpGet("[action]")]
         [Route("/AttemptLogin")]
         public IActionResult AttemptLogin(LoginModel loginModel)
@@ -25,6 +29,8 @@ namespace BugTracker.Controllers
                 HttpContext.Session.SetString("firstname", loginResult.FirstName);
                 HttpContext.Session.SetString("lastname", loginResult.LastName);
                 HttpContext.Session.SetString("email", loginResult.Email);
+                HttpContext.Session.SetInt32("userid", loginResult.UserId);
+
 
                 ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
                 return View("Dashboard");
@@ -39,13 +45,12 @@ namespace BugTracker.Controllers
         [Route("/AccountCreate")]
         public IActionResult CreateAccount(CreateaccModel createaccModel)
         {
-            CreateAccountResult createAccountResult = Authenticate.CreateAccount(createaccModel.Email, createaccModel.FirstName, createaccModel.LastName, createaccModel.Password);
 
-            if (createAccountResult.Success)
+            if (Authenticate.CreateAccount(createaccModel.Email, createaccModel.FirstName, createaccModel.LastName, createaccModel.Password))
             {
-                HttpContext.Session.SetString("firstname", createAccountResult.FirstName);
-                HttpContext.Session.SetString("lastname", createAccountResult.LastName);
-                HttpContext.Session.SetString("email", createAccountResult.Email);
+                HttpContext.Session.SetString("firstname", createaccModel.FirstName);
+                HttpContext.Session.SetString("lastname", createaccModel.LastName);
+                HttpContext.Session.SetString("email", createaccModel.Email);
 
                 ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
                 return View("Dashboard");
@@ -54,6 +59,17 @@ namespace BugTracker.Controllers
             {
                 return View("Createacc");
             }
+        }
+
+        [HttpGet("[action]")]
+        [Route("/ProjectCreate")]
+        public void CreateProject(DashboardModel dashboardModel)
+        {
+            string sql = "INSERT INTO PROJECT (title, description, datemodified, UserId) VALUES ('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now + "', " + HttpContext.Session.GetInt32("userid") + ")";
+
+            using MySqlConnection conn = new(CONN_STR);
+            MySqlCommand com = new(sql, conn);
+            com.ExecuteNonQuery();
         }
 
         public IActionResult Index()
@@ -145,7 +161,7 @@ namespace BugTracker.Controllers
 
         private void PreserveViewData()
         {
-            ViewData["username"] = HttpContext.Session.GetString("username");
+            //ViewData["username"] = HttpContext.Session.GetString("username");
         }
 
         private Boolean HasSession()
