@@ -131,6 +131,23 @@ namespace BugTracker.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_project");
+
+                entity.Property(e => e.JoinCode)
+                    .IsRequired()
+                    .HasColumnName("joincode")
+                    .HasMaxLength(80)
+                    .IsUnicode(false);
+
+            });
+
+            modelBuilder.Entity<ProjectUserJunction>(entity =>
+            {
+                entity.ToTable("projectUserJunction");
+
+                entity.Property(e => e.ProjectUserJunctionId).HasColumnName("projectuserjunctionid");
+                entity.Property(e => e.ProjectId).HasColumnName("projectid");
+                entity.Property(e => e.UserId).HasColumnName("userid");
+
             });
 
             modelBuilder.Entity<History>(entity =>
@@ -268,12 +285,20 @@ namespace BugTracker.Models
         public int ProjectId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string JoinCode { get; set; }
         public DateTime DateModified { get; set; }
 
         public int UserId { get; set; }
 
         public virtual User UserCreated { get; set; }
         public virtual ICollection<Ticket> Ticket { get; set; }
+    }
+
+    public partial class ProjectUserJunction
+    {
+        public int ProjectUserJunctionId { get; set; }
+        public int ProjectId { get; set; }
+        public int UserId { get; set; }
     }
 
     public partial class History

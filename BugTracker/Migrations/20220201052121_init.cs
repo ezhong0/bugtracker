@@ -9,6 +9,20 @@ namespace BugTracker.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "projectUserJunction",
+                columns: table => new
+                {
+                    projectuserjunctionid = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    projectid = table.Column<int>(nullable: false),
+                    userid = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_projectUserJunction", x => x.projectuserjunctionid);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "user",
                 columns: table => new
                 {
@@ -33,6 +47,7 @@ namespace BugTracker.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     title = table.Column<string>(unicode: false, maxLength: 80, nullable: false),
                     description = table.Column<string>(type: "text", nullable: true),
+                    joincode = table.Column<string>(unicode: false, maxLength: 80, nullable: false),
                     datemodified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
@@ -190,6 +205,8 @@ namespace BugTracker.Migrations
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
-        { }
+        {
+            
+        }
     }
 }

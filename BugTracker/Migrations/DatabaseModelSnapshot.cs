@@ -131,6 +131,13 @@ namespace BugTracker.Migrations
                         .HasColumnName("description")
                         .HasColumnType("text");
 
+                    b.Property<string>("JoinCode")
+                        .IsRequired()
+                        .HasColumnName("joincode")
+                        .HasColumnType("varchar(80)")
+                        .HasMaxLength(80)
+                        .IsUnicode(false);
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnName("title")
@@ -146,6 +153,26 @@ namespace BugTracker.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("project");
+                });
+
+            modelBuilder.Entity("BugTracker.Models.ProjectUserJunction", b =>
+                {
+                    b.Property<int>("ProjectUserJunctionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("projectuserjunctionid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnName("projectid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnName("userid")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProjectUserJunctionId");
+
+                    b.ToTable("projectUserJunction");
                 });
 
             modelBuilder.Entity("BugTracker.Models.Ticket", b =>

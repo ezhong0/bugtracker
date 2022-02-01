@@ -52,6 +52,22 @@ namespace BugTracker.Controllers
                 HttpContext.Session.SetString("lastname", createaccModel.LastName);
                 HttpContext.Session.SetString("email", createaccModel.Email);
 
+                string sql = "SELECT * FROM USER WHERE email = '" + createaccModel.Email + "'";
+                using MySqlConnection conn = new(CONN_STR);
+                conn.Open();
+
+
+                DataTable ds = new();
+                using (MySqlDataAdapter da = new())
+                {
+                    da.SelectCommand = new MySqlCommand(sql, conn);
+                    da.Fill(ds);
+
+                }
+
+                HttpContext.Session.SetInt32("userid", (int)((ds.Rows[0])["userid"]));
+
+
                 ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
                 return RedirectToAction("Dashboard", "Home");
             }
@@ -65,11 +81,67 @@ namespace BugTracker.Controllers
         [Route("/CreateProject")]
         public IActionResult CreateProject(DashboardModel dashboardModel)
         {
-            string sql = "INSERT INTO PROJECT (title, description, datemodified, UserId) VALUES " +
-                "('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', " + HttpContext.Session.GetInt32("userid") + ")";
+            Random random = new();
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            int codelength = 6;
+
+            string tempcode, sql;
+
+            while(true)
+            {
+                tempcode = new string(Enumerable.Repeat(chars, codelength).Select(s => s[random.Next(s.Length)]).ToArray());
+                sql = "SELECT * FROM PROJECT WHERE joincode = '" + tempcode + "'";
+                DataTable ds = new();
+                using (MySqlConnection conn0 = new(CONN_STR))
+                {
+                    conn0.Open();
+                    using (MySqlDataAdapter da = new())
+                    {
+                        da.SelectCommand = new MySqlCommand(sql, conn0);
+                        da.Fill(ds);
+                    }
+                }
+                if(ds.Rows.Count == 0)
+                {
+                    break;
+                }
+            }
+
+            sql = "INSERT INTO PROJECT (title, description, datemodified, joincode, UserId) VALUES " +
+               "('" + dashboardModel.Title + "', '" + dashboardModel.Description + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + tempcode + "', " + HttpContext.Session.GetInt32("userid") + ")";
 
             using MySqlConnection conn = new(CONN_STR);
             conn.Open();
+            MySqlCommand com = new(sql, conn);
+            com.ExecuteNonQuery();
+
+            dashboardModel.JoinCode = tempcode;
+
+            return JoinProject(dashboardModel);
+        }
+
+        [HttpGet("[action]")]
+        [Route("/JoinProject")]
+        public IActionResult JoinProject(DashboardModel dashboardModel)
+        {
+            string sql = "SELECT * FROM PROJECT WHERE joincode = '" + dashboardModel.JoinCode + "'";
+            using MySqlConnection conn = new(CONN_STR);
+            conn.Open();
+
+
+            DataTable ds = new();
+            using (MySqlDataAdapter da = new())
+            {
+                da.SelectCommand = new MySqlCommand(sql, conn);
+                da.Fill(ds);
+
+            }
+            if (ds.Rows.Count == 0)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
+
+            sql = "INSERT INTO PROJECTUSERJUNCTION (projectid, userid) VALUES (" + (int)((ds.Rows[0])["projectid"]) + ", " + HttpContext.Session.GetInt32("userid") + ")";
             MySqlCommand com = new(sql, conn);
             com.ExecuteNonQuery();
 
@@ -118,8 +190,13 @@ namespace BugTracker.Controllers
         [Route("/Dash")]
         public IActionResult Dashboard()
         {
+            if (!HasSession())
+            {
+                return Logout();
+            }
+            string sql = "SELECT * FROM PROJECTUSERJUNCTION J INNER JOIN PROJECT P ON P.projectid = J.projectid WHERE J.userid = " + HttpContext.Session.GetInt32("userid");
 
-            string sql = "SELECT * FROM PROJECT WHERE USERID = '" + HttpContext.Session.GetInt32("userid") + "'";
+            //string sql = "SELECT * FROM PROJECT WHERE USERID = '" + HttpContext.Session.GetInt32("userid") + "'";
 
             DataTable ds = new();
             using (MySqlConnection conn = new(CONN_STR))
@@ -137,14 +214,12 @@ namespace BugTracker.Controllers
                                     Title = dr["title"].ToString(),
                                     Description = dr["description"].ToString(),
                                     DateModified = dr["datemodified"].ToString(),
+                                    JoinCode = dr["joincode"].ToString(),
                                     UserId = Convert.ToInt32(dr["userid"])
 
                                 }).ToList();
 
-            if (!HasSession())
-            {
-                return Logout();
-            }
+            
             PreserveViewData();
             return View("Dashboard");
         }
