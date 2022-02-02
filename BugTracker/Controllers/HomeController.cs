@@ -194,45 +194,12 @@ namespace BugTracker.Controllers
             {
                 return Logout();
             }
-            string sql = "SELECT * FROM PROJECTUSERJUNCTION J INNER JOIN PROJECT P ON P.projectid = J.projectid WHERE J.userid = " + HttpContext.Session.GetInt32("userid");
 
-            //string sql = "SELECT * FROM PROJECT WHERE USERID = '" + HttpContext.Session.GetInt32("userid") + "'";
-
-            DataTable ds = new();
-            using (MySqlConnection conn = new(CONN_STR))
-            {
-                conn.Open();
-                using MySqlDataAdapter da = new();
-                da.SelectCommand = new MySqlCommand(sql, conn);
-                da.Fill(ds);
-            }
-            
-            ViewBag.projects = (from DataRow dr in ds.Rows
-                                select new DashboardModel()
-                                {
-                                    ProjectId = Convert.ToInt32(dr["projectid"]),
-                                    Title = dr["title"].ToString(),
-                                    Description = dr["description"].ToString(),
-                                    DateModified = dr["datemodified"].ToString(),
-                                    JoinCode = dr["joincode"].ToString(),
-                                    UserId = Convert.ToInt32(dr["userid"])
-
-                                }).ToList();
-
+            LoadProjectTable();
             
             PreserveViewData();
             return View("Dashboard");
         }
-
-        //class ProjectData
-        //{
-        //    public int ProjectId { get; set; }
-        //    public string Title { get; set; }
-        //    public string Description { get; set; }
-        //    public string DateModified { get; set; }
-        //    public int UserId { get; set; }
-        //}
-
 
         [HttpGet("[action]")]
         [Route("/Project")]
@@ -242,6 +209,9 @@ namespace BugTracker.Controllers
             {
                 return Logout();
             }
+
+            LoadProjectTable();
+
             PreserveViewData();
             return View("Project");
         }
@@ -273,6 +243,37 @@ namespace BugTracker.Controllers
         private void PreserveViewData()
         {
             ViewData["fullname"] = HttpContext.Session.GetString("firstname") + " " + HttpContext.Session.GetString("lastname");
+        }
+
+        private void LoadProjectTable()
+        {
+            string sql = "SELECT * FROM PROJECTUSERJUNCTION J INNER JOIN PROJECT P ON P.projectid = J.projectid WHERE J.userid = " + HttpContext.Session.GetInt32("userid");
+
+            //string sql = "SELECT * FROM PROJECT WHERE USERID = '" + HttpContext.Session.GetInt32("userid") + "'";
+
+            DataTable ds = new();
+            using (MySqlConnection conn = new(CONN_STR))
+            {
+                conn.Open();
+                using MySqlDataAdapter da = new();
+                da.SelectCommand = new MySqlCommand(sql, conn);
+                da.Fill(ds);
+            }
+
+            ds.DefaultView.Sort = "title desc";
+
+            ViewBag.projects = (from DataRow dr in ds.Rows
+                                select new DashboardModel()
+                                {
+                                    ProjectId = Convert.ToInt32(dr["projectid"]),
+                                    Title = dr["title"].ToString(),
+                                    Description = dr["description"].ToString(),
+                                    DateModified = dr["datemodified"].ToString(),
+                                    JoinCode = dr["joincode"].ToString(),
+                                    UserId = Convert.ToInt32(dr["userid"])
+
+                                }).ToList();
+
         }
 
         private Boolean HasSession()

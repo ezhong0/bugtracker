@@ -10,6 +10,37 @@
     <partial name="Navbar" />
     <div id="layoutSidenav">
         <partial name="SideNavbar" />
-        project
+        <div id="layoutSidenav_content">
+            <div class="container-fluid px-4">
+                <h3 class="mt-4">Project</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Date Modified</th>
+                            <th>Join Code</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in ViewBag.projects)
+                    {
+                        <tr>
+                            <td>
+                                @item.Title
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+                            <td>
+                                @item.DateModified
+                            </td>
+                            <td>
+                                @item.JoinCode
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
     </div>
 </body>
