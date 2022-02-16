@@ -6,14 +6,14 @@ thanks for looking <3
 
 #### Update:
 Live server established
-https://bugtracker20220124002955.azurewebsites.net/
-mySQL server not connected, but login etc. is fully functional on local
+https://bugtracker20220124002955.azurewebsites.net/  
+mySQL server not connected, but login etc. is fully functional on local  
 
 
 It's mostly done, two things have to be done:
-App is missing some functionality, displaying various tables and charts
-mySQL server is not connected to live site via Azure, I have to figure out how to do that
-Also, some cleanup could be needed to make it look nice. that is not a pretty url
+App is missing some functionality, displaying various tables and charts  
+mySQL server is not connected to live site via Azure, I have to figure out how to do that  
+Also, some cleanup could be needed to make it look nice. that is not a pretty url  
 
 #### Progress:
 **Jan 4:**  
