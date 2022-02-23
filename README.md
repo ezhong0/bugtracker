@@ -3,8 +3,10 @@
 this software developed by edward for bug tracking and agile development :)  
 thanks for looking <3  
 
+#### Update 2/22:
+App functional, but Azure hosting turns out to be expensive upon the expiration of the 1 month free trial. Live site is currently temporarily unavailable, as I've disabled the subscription. Will work out how to host on Azure without incurring costs  
 
-#### Update:
+#### Update 2/15:
 Live server established
 https://bugtracker20220124002955.azurewebsites.net/  
 mySQL server not connected, but login etc. is fully functional on local  
@@ -15,7 +17,7 @@ App is missing some functionality, displaying various tables and charts
 mySQL server is not connected to live site via Azure, I have to figure out how to do that  
 Also, some cleanup could be needed to make it look nice. that is not a pretty url  
 
-#### Progress:
+#### (Old) Progress:
 **Jan 4:**  
 SRS written  
 Barebones web app functional  
