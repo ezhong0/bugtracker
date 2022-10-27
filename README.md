@@ -5,12 +5,12 @@ thanks for looking <3
 
 #### Update 10/26:
 I tried hosting it on Heroku but there are so many issues with the mySQL database I don't think it's going to work easily. I'll include some screenshots and feel free to ask me for a demo!
-![home](home.png)
-![createacc](createacc.png)
-![login](login.png)
-![dash](dash.png)
-![proj](proj.png)
-![db](db.png)
+![home](img/home.png)
+![createacc](img/createacc.png)
+![login](img/login.png)
+![dash](img/dash.png)
+![proj](img/proj.png)
+![db](img/db.png)
 
 
 #### Update 2/22:
