@@ -2,6 +2,7 @@
 
 this software developed by edward for bug tracking and agile development :)  
 thanks for looking <3  
+check out srs.md for the inital srs I made before writing any code!
 
 #### Update 10/26:
 I tried hosting it on Heroku but there are so many issues with the mySQL database I don't think it's going to work easily. I'll include some screenshots and feel free to ask me for a demo!
