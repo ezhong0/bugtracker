@@ -3,6 +3,16 @@
 this software developed by edward for bug tracking and agile development :)  
 thanks for looking <3  
 
+#### Update 10/26:
+I tried hosting it on Heroku but there are so many issues with the mySQL database I don't think it's going to work easily. I'll include some screenshots and feel free to ask me for a demo!
+![home](home.png)
+![createacc](createacc.png)
+![login](login.png)
+![dash](dash.png)
+![proj](proj.png)
+![db](db.png)
+
+
 #### Update 2/22:
 App functional, but Azure hosting turns out to be expensive upon the expiration of the 1 month free trial. Live site is currently temporarily unavailable, as I've disabled the subscription. Will work out how to host on Azure without incurring costs  
 
